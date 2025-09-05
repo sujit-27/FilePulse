@@ -8,9 +8,8 @@ export const fetchTransactions = createAsyncThunk(
       const token = await getToken();
       const response = await axios.get("https://filepulse.onrender.com/transactions", {
         headers: {
-          Authorization: `Bearer ${token}`,
-          withCredentials: true,
-        },
+          Authorization: `Bearer ${token}`, 
+        },withCredentials: true,
       });
       return response.data; 
     } catch (error) {

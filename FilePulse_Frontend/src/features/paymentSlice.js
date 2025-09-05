@@ -43,6 +43,7 @@ export const initiatePayment = createAsyncThunk(
         credits: plan.credits
       }, {
         headers: { 'Authorization': `Bearer ${token}` }
+        ,withCredentials: true,
       });
 
       // Prepare Razorpay options
