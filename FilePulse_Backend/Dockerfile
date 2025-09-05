@@ -5,13 +5,13 @@ FROM maven:3.9.4-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copy only pom.xml first for dependency resolution
-COPY FilePulse/pom.xml FilePulse/
+COPY FilePulse_Backend/pom.xml FilePulse_Backend/
 
 # Copy source code
-COPY FilePulse/src FilePulse/src/
+COPY FilePulse_Backend/src FilePulse_Backend/src/
 
 # Build the package skipping tests to speed up build
-RUN mvn -f FilePulse/pom.xml clean package -DskipTests
+RUN mvn -f FilePulse_Backend/pom.xml clean package -DskipTests
 
 # Runtime stage: Use lightweight Java 21 JRE image
 FROM eclipse-temurin:21-jre
@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the built jar from the build stage
-COPY --from=build /app/FilePulse/target/FilePulse-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/FilePulse_Backend/target/FilePulse-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port 8080 on the container
 EXPOSE 8080
