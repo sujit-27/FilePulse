@@ -36,14 +36,31 @@ public class FileController {
     private UserCreditsService userCreditsService;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFiles(@RequestPart("files")MultipartFile files[]) throws IOException {
+    public ResponseEntity<?> uploadFiles(@RequestParam("files") List<MultipartFile> files) {
         Map<String, Object> response = new HashMap<>();
-        List<FileMetaDataDto> list = fileMetaDataService.uploadFiles(files);
 
-        UserCredits finalCredits = userCreditsService.getUserCredits();
-        response.put("files",list);
-        response.put("remainingCredits",finalCredits.getCredits());
-        return ResponseEntity.ok(response);
+        try {
+            // Upload files
+            List<FileMetaDataDto> list = fileMetaDataService.uploadFiles(files.toArray(new MultipartFile[0]));
+            response.put("files", list);
+
+            // Handle user credits safely
+            UserCredits finalCredits = null;
+            try {
+                finalCredits = userCreditsService.getUserCredits();
+            } catch (Exception e) {
+                System.out.println("No user credits found: " + e.getMessage());
+            }
+
+            response.put("remainingCredits", finalCredits != null ? finalCredits.getCredits() : 0);
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            // Log and return structured error
+            e.printStackTrace();
+            response.put("error", "File upload failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     @GetMapping("/my")
