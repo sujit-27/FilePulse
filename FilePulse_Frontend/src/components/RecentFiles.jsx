@@ -27,8 +27,21 @@ const RecentFiles = ({ files }) => {
                 <td className="hidden sm:table-cell py-2 pr-4">{file ? 'You' : '--'}</td>
                 <td className="hidden sm:table-cell py-2 pr-4">{file ? new Date(file.modifiedAt || file.updatedAt || file.uploadedAt).toLocaleDateString() : '--'}</td>
                 <td className="py-2 pr-4 flex items-center gap-1">
-                  <Lock size={14} />
-                  Private
+                  {file.public ? (
+                    <>
+                     <Globe size={16} className="text-green-500"/>
+                       <span className='group-hover:underline'>
+                         Public
+                       </span>
+                    </>
+                  ) : (
+                    <>
+                     <Lock size={16} className="text-gray-500"/>
+                       <span className='group-hover:underline'>
+                          Private
+                       </span>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
