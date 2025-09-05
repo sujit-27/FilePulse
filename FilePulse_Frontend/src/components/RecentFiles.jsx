@@ -11,8 +11,6 @@ const RecentFiles = ({ files }) => {
             <tr className="text-gray-400 uppercase border-b">
               <th className="py-2 pr-4 text-left">Name</th>
               <th className="py-2 pr-4 text-left">Size</th>
-              <th className="py-2 pr-4 text-left">Uploaded By</th>
-              <th className="py-2 pr-4 text-left">Modified</th>
               <th className="py-2 pr-4 text-left">Sharing</th>
             </tr>
           </thead>
@@ -24,8 +22,6 @@ const RecentFiles = ({ files }) => {
                   <span className="truncate max-w-[150px]">{file.name}</span>
                 </td>
                 <td className="py-2 pr-4">{file ? (file.size / 1024).toFixed(1) + ' KB' : '--'}</td>
-                <td className="py-2 pr-4">{file ? 'You' : '--'}</td>
-                <td className="py-2 pr-4">{file ? new Date(file.modifiedAt || file.updatedAt || file.uploadedAt).toLocaleDateString() : '--'}</td>
                 <td className="py-2 pr-4 flex items-center gap-1">
                   <Lock size={14} />
                   Private
