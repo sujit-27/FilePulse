@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -27,41 +26,41 @@ public class SecurityConfig {
     private ClerkJwtAuthFilter clerkJwtAuthFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1.0/webhooks/**", "/files/public/**", "/files/download/**")
-                        .permitAll()
+                        // Public endpoints
+                        .requestMatchers(
+                                "/api/v1.0/webhooks/**",
+                                "/files/public/**",
+                                "/files/download/**",
+                                "/files/upload/**"  // allow upload endpoint for testing
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(clerkJwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt
                                 .jwkSetUri("https://discrete-gorilla-59.clerk.accounts.dev/.well-known/jwks.json")
                         )
                 );
 
-        return httpSecurity.build();
-    }
-
-    private UrlBasedCorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration config = new CorsConfiguration();
-         config.setAllowedOrigins((List.of("http://filepulse.vercel.app")));
-         config.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
-         config.setAllowedHeaders(List.of("Authorization" , "Content-Type"));
-         config.setAllowCredentials(true);
-
-         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-         source.registerCorsConfiguration("/**",config);
-
-         return source;
+        return http.build();
     }
 
     @Bean
     public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
-    }
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("https://filepulse.vercel.app")); // use HTTPS for Vercel
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
 
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 }
