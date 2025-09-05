@@ -58,6 +58,7 @@ public class SecurityConfig {
                 config.setAllowedOrigins(List.of(
                         "https://filepulse-git-main-sujti-kumar-shaws-projects.vercel.app",
                         "https://filepulse-mk0gcqhzm-sujit-kumar-shaws-projects.vercel.app",
+                        "https://filepulse.vercel.app"
                 ));
 
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
