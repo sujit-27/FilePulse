@@ -16,6 +16,7 @@ export const uploadFiles = createAsyncThunk(
       });
 
       if (response.data && response.data.remainingCredits !== undefined) {
+        console.log(response.data , response.status);
         dispatch({ type: 'credits/updateCredits', payload: response.data.remainingCredits });
       }
 
