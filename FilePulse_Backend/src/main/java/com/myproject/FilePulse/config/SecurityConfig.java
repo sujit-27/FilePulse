@@ -57,7 +57,7 @@ public class SecurityConfig {
 
                 config.setAllowedOrigins(List.of(
                         "https://filepulse-git-main-sujti-kumar-shaws-projects.vercel.app",
-                        "https://filepulse-mk0gcqhzm-sujit-kumar-shaws-projects.vercel.app",
+                        "https://filepulse-7whnkoday-sujti-kumar-shaws-projects.vercel.app/",
                         "https://filepulse.vercel.app"
                 ));
 
