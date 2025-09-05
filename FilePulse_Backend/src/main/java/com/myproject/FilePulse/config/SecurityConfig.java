@@ -51,16 +51,23 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://filepulse.vercel.app","https://filepulse-git-main-sujti-kumar-shaws-projects.vercel.app","https://filepulse-mk0gcqhzm-sujti-kumar-shaws-projects.vercel.app"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        config.setAllowCredentials(true);
+        @Bean
+        public CorsFilter corsFilter() {
+                CorsConfiguration config = new CorsConfiguration();
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+                config.setAllowedOrigins(List.of(
+                        "https://filepulse-git-main-sujti-kumar-shaws-projects.vercel.app",
+                        "https://filepulse-mk0gcqhzm-sujit-kumar-shaws-projects.vercel.app",
+                ));
+
+                config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+                config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+                config.setAllowCredentials(true);
+
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", config);
+
+                return new CorsFilter(source);
+        }
+
 }
