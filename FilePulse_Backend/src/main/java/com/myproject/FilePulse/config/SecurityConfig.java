@@ -33,10 +33,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
                         .requestMatchers(
-                                "/api/v1.0/webhooks/**",
+                                "/webhooks/**",
                                 "/files/public/**",
                                 "/files/download/**",
-                                "/files/upload/**"  // allow upload endpoint for testing
+                                "/files/upload/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
