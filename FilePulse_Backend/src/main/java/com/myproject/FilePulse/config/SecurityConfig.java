@@ -57,8 +57,8 @@ public class SecurityConfig {
                 CorsConfiguration config = new CorsConfiguration();
 
                 config.setAllowedOrigins(List.of(
-                        "https://filepulse-git-main-sujti-kumar-shaws-projects.vercel.app",
-                        "https://filepulse-7whnkoday-sujti-kumar-shaws-projects.vercel.app/",
+                        "https://filepulse-git-main-sujit-kumar-shaws-projects.vercel.app",
+                        "https://filepulse-7whnkoday-sujit-kumar-shaws-projects.vercel.app/",
                         "https://filepulse.vercel.app"
                 ));
 
