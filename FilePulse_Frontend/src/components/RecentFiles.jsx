@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Lock } from 'lucide-react';
+import { FileText,Globe, Lock } from 'lucide-react';
 
 const RecentFiles = ({ files }) => {
   return (
