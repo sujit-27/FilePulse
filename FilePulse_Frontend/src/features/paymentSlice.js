@@ -67,7 +67,8 @@ export const verifyPayment = createAsyncThunk(
         razorpay_signature: response.razorpay_signature,
         planId: plan.id
       }, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${token}` },
+        withCredentials: true,
       });
 
       if (verifyResponse.data.success) {

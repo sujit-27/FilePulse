@@ -6,7 +6,8 @@ export const deleteFile = createAsyncThunk(
   async ({ fileId, token }, thunkAPI) => {
     try {
       const response = await axios.delete(`https://filepulse.onrender.com/files/${fileId}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (response.status === 204) {
         return fileId;

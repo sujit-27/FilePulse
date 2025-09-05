@@ -9,9 +9,10 @@ export const fetchTransactions = createAsyncThunk(
       const response = await axios.get("https://filepulse.onrender.com/transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
+          withCredentials: true,
         },
       });
-      return response.data; // array of transactions
+      return response.data; 
     } catch (error) {
       return rejectWithValue("Failed to load your transaction history. Please try again later.");
     }

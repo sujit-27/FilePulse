@@ -10,7 +10,9 @@ export const fetchUserCredits = createAsyncThunk(
       const token = await getToken();
       const response = await axios.get(
         'https://filepulse.onrender.com/users/credits',
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      }
       );
       if (response.status === 200) return response.data.credits;
       return rejectWithValue('Unexpected response status');
