@@ -151,11 +151,11 @@ const MyFiles = () => {
               <List 
                 onClick={() => setViewMode("list")}
                 size={24}
-                className={`cursor-pointer transition-colors ${viewMode === 'list' ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}/>
+                className={`hidden sm:block cursor-pointer transition-colors ${viewMode === 'list' ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}/>
               <Grid
                 size={24} 
                 onClick={() => setViewMode("grid")}
-                className={`cursor-pointer transition-colors ${viewMode === "grid" ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}/>
+                className={`hidden sm:block cursor-pointer transition-colors ${viewMode === "grid" ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}/>
             </div>
           </div>
 
@@ -192,7 +192,7 @@ const MyFiles = () => {
               ))}
             </div>
           ) : (
-            <div className='overflow-x-auto bg-white rounded-lg shadow'>
+            <div className='hidden sm:block overflow-x-auto bg-white rounded-lg shadow'>
               <table className='min-w-full'>
                 <thead className='bg-gray-50 border-b border-gray-200'>
                   <tr>
