@@ -12,8 +12,7 @@ export const uploadFiles = createAsyncThunk(
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
-          withCredentials: true,
-        }
+        },withCredentials: true,
       });
 
       if (response.data && response.data.remainingCredits !== undefined) {
