@@ -31,14 +31,15 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints
-                        .requestMatchers(
-                                "/webhooks/**",
-                                "/files/public/**",
-                                "/files/download/**",
-                                "/files/upload/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                // other endpoints
+                .requestMatchers(
+                        "/webhooks/**",
+                        "/files/public/**",
+                        "/files/download/**",
+                        "/files/upload/**"
+                ).permitAll()
+                .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(clerkJwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
