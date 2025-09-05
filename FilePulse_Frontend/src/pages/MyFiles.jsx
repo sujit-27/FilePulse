@@ -14,7 +14,7 @@ import LinkShareModal from '../components/LinkShareModal';
 
 const MyFiles = () => {
 
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState("grid");
   const {getToken} = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
