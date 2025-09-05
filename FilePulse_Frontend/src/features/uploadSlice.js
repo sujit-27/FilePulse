@@ -23,6 +23,7 @@ export const uploadFiles = createAsyncThunk(
       return { message: 'Files uploaded successfully!' };
     } catch (error) {
       console.error('Upload error response:', error);
+      console.error('Upload error response:', error.response?.data || error.message, error);
       return rejectWithValue(error.response?.data?.message || 'Error uploading the files. Please try again.');
     }
   }
