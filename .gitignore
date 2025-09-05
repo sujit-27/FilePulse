@@ -1,0 +1,81 @@
+# -------- Backend (Spring Boot) --------
+
+# Maven / Gradle build output
+target/
+build/
+
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE and editor files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.class
+
+# Spring / Eclipse specific
+.apt_generated
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment files (if any)
+.env
+application.properties
+application.yml
+
+# -------- Frontend (React/Node.js) --------
+
+# Dependency directories
+node_modules/
+
+# Build output (production)
+build/
+dist/
+dist-ssr/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Editor settings
+.vscode/
+!.vscode/extensions.json
+
+# Misc
+*.local
+
+# Test snapshots
+**/__snapshots__/
+
+# -------- Common --------
+
+# Ignore Docker-related files if any
+.dockerignore
+
+# Ignore bundler or package files if not needed
+*.tgz
+
+# Ignore coverage reports
+coverage/
