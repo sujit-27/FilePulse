@@ -6,7 +6,7 @@ export const fetchFiles = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       // const token = await getToken();
-      const response = await axios.get('http://localhost:8080/files/my', {
+      const response = await axios.get('https://filepulse.onrender.com/files/my', {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data;
@@ -20,7 +20,7 @@ export const togglePublic = createAsyncThunk(
   'files/togglePublic',
   async ({fileId,token}, thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:8080/files/${fileId}/toggle-public`, {}, {
+      await axios.patch(`https://filepulse.onrender.com/files/${fileId}/toggle-public`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return fileId;

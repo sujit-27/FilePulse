@@ -6,7 +6,7 @@ export const downloadFile = createAsyncThunk(
   'download/downloadFile',
   async ({ fileId, token, fileName }, thunkAPI) => {
     try {
-      const response = await axios.get(`http://localhost:8080/files/download/${fileId}`, { 
+      const response = await axios.get(`https://filepulse.onrender.com/files/download/${fileId}`, { 
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });

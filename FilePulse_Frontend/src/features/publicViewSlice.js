@@ -6,7 +6,7 @@ export const fetchPublicFile = createAsyncThunk(
   'publicView/fetchPublicFile',
   async (fileId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8080/files/public/${fileId}`);
+      const response = await axios.get(`https://filepulse.onrender.com/files/public/${fileId}`);
       return response.data;
     } catch (error) {
       return rejectWithValue("Could not retrieve file. The link may be invalid or the file may have been removed.");
@@ -20,7 +20,7 @@ export const downloadFile = createAsyncThunk(
   async ({ fileId, filename }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/files/download/${fileId}`,
+        `https://filepulse.onrender.com/files/download/${fileId}`,
         { responseType: 'blob' }
       );
       return { blob: response.data, filename };

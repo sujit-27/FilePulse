@@ -8,7 +8,7 @@ export const uploadFiles = createAsyncThunk(
     try {
       const formData = new FormData();
       files.forEach(file => formData.append('files', file));      
-      const response = await axios.post('http://localhost:8080/files/upload', formData, {
+      const response = await axios.post('https://filepulse.onrender.com/files/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

@@ -9,7 +9,7 @@ export const fetchUserCredits = createAsyncThunk(
       if (!isSignedIn) return rejectWithValue('Not signed in');
       const token = await getToken();
       const response = await axios.get(
-        'http://localhost:8080/users/credits',
+        'https://filepulse.onrender.com/users/credits',
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) return response.data.credits;

@@ -6,7 +6,7 @@ export const fetchTransactions = createAsyncThunk(
   async (getToken, { rejectWithValue }) => {
     try {
       const token = await getToken();
-      const response = await axios.get("http://localhost:8080/transactions", {
+      const response = await axios.get("https://filepulse.onrender.com/transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -36,7 +36,7 @@ export const initiatePayment = createAsyncThunk(
   async ({ plan, name, email, getToken, isSignedIn }, { dispatch, rejectWithValue }) => {
     try {
       const token = await getToken();
-      const response = await axios.post("http://localhost:8080/payments/create-order", {
+      const response = await axios.post("https://filepulse.onrender.com/payments/create-order", {
         planId: plan.id,
         amount: plan.price * 100,
         currency: "INR",
@@ -61,7 +61,7 @@ export const verifyPayment = createAsyncThunk(
   async ({ response, plan, getToken, isSignedIn }, { dispatch, rejectWithValue }) => {
     try {
       const token = await getToken();
-      const verifyResponse = await axios.post('http://localhost:8080/payments/verify-payment', {
+      const verifyResponse = await axios.post('https://filepulse.onrender.com/payments/verify-payment', {
         razorpay_order_id: response.razorpay_order_id,
         razorpay_payment_id: response.razorpay_payment_id,
         razorpay_signature: response.razorpay_signature,
